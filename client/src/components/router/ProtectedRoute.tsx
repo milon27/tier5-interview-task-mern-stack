@@ -6,10 +6,10 @@ import { StateContext } from '../../utils/context/MainContext';
 export default function ProtectedRoute(props: {
     children: React.ReactNode
 }) {
-    const { user } = useContext(StateContext);
+    const { admin } = useContext(StateContext);
 
     // send to login page if not logged in
-    if (user == null) {
+    if (admin == null) {
         return <Navigate to={URL.LOGIN} />;
     }
 

@@ -17,7 +17,7 @@ interface ILoginData {
 }
 
 export default function Login() {
-    const { user, setUser } = useContext(StateContext)
+    const { admin, setAdmin } = useContext(StateContext)
     const nav = useNavigate()
     const { register, formState: { errors }, getValues, handleSubmit, reset } = useForm<ILoginData>()
     const [loading, setLoading] = useState(false)
@@ -33,11 +33,11 @@ export default function Login() {
                 email: "",
                 pass: ""
             })
-            setUser(user)
+            setAdmin(user)
         })
     }
 
-    if (user?.id) {
+if (admin?.id) {
         return <Navigate to={URL.HOME} />
     }
     return (

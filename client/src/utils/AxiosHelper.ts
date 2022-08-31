@@ -17,8 +17,8 @@ const postData = async <ReturnType, InputType>(
     setLoading(true)
     try {
         const result = await axios.post<IResponse<ReturnType>>(url, data)
-        if (result.data.data) {
-            onDone(result.data.data)
+        if (result.data.response) {
+            onDone(result.data.response)
         } else {
             toast(result.data.message)
         }

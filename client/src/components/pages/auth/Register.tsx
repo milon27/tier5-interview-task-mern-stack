@@ -20,7 +20,7 @@ interface IRegisterData {
 }
 
 export default function Register() {
-    const { user, setUser } = useContext(StateContext)
+    const { admin, setAdmin } = useContext(StateContext)
     const nav = useNavigate()
     const { register, formState: { errors }, getValues, handleSubmit, reset } = useForm<IRegisterData>()
     const [loading, setLoading] = useState(false)
@@ -39,11 +39,11 @@ export default function Register() {
                 name: "",
                 cPass: ""
             })
-            setUser(user)
+            setAdmin(user)
         })
     }
 
-    if (user?.id) {
+    if (admin?.id) {
         return <Navigate to={URL.HOME} />
     }
 

@@ -11,7 +11,7 @@ export default function AppWrapper(props: PropsWithChildren<any>) {
 
     useEffect(() => {
         //console.log("AppWrapper->", data.response)
-        setAdmin(data.data)
+        setAdmin(data.response)
     }, [data])
 
     // error
