@@ -24,7 +24,7 @@ bash client.sh
 
 ### Process 2 (manully)
 
-- **Run postgresql container**
+- **Run database container**
 ```bash
 docker compose up -d
 ```
