@@ -7,6 +7,7 @@ import { IUser } from '../../../utils/models/User'
 import LineCard from '../../layout/common/LineCard'
 import Loading from '../../layout/common/Loading'
 import MyCard from '../../layout/common/MyCard'
+import MySelectGender from '../../layout/common/MySelectGender'
 import Button from '../../layout/form/Button'
 import MySelect from '../../layout/form/MySelect'
 import Spacer from '../../layout/Spacer'
@@ -29,7 +30,7 @@ export default function Home() {
     const [gender, setGender] = useState("")
 
     useEffect(() => {
-        if (country !== "" && device !== "" && gender == "") {
+        if (country == "" && device == "" && gender == "") {
             // console.log("no need to run");
         } else {
             doFilter()
@@ -98,33 +99,11 @@ export default function Home() {
                         }}>Top 15 users by usage time</Button>
                     </div>
                     <div className='flex justify-between items-center gap-2'>
-                        <MySelect
-                            label='Filter By Gender?'
-                            value={gender}
-                            options={[
-                                {
-                                    id: "1",
-                                    title: "MALE",
-                                    value: "MALE"
-                                },
-                                {
-                                    id: "2",
-                                    title: "FEMALE",
-                                    value: "FEMALE"
-                                },
-                                {
-                                    id: "3",
-                                    title: "OTHER",
-                                    value: "OTHER"
-                                }
-                            ]}
-                            onSelect={(item) => {
-                                setGender(item.value)
-                            }}
-                        />
+                        <MySelectGender gender={gender} onSelect={(value) => {
+                            setGender(value)
+                        }} />
                     </div>
                     <div className='flex justify-between  gap-2'>
-
                         <MySelect
                             label='Filter By Device?'
                             value={device}
@@ -135,7 +114,6 @@ export default function Home() {
                         />
                     </div>
                     <div className='flex justify-between  gap-2'>
-
                         <MySelect
                             label='Filter By Country?'
                             value={country}

@@ -1,6 +1,6 @@
 export const DeviceList = ["Apple", "Windows", "Android", "Linux"].map((item, idx) => {
     return {
-        id: (idx + 1).toString(),
+        id: item,
         title: item,
         value: item
     }

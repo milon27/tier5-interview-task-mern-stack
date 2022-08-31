@@ -5,6 +5,7 @@ import URL from '../../utils/constant/URL'
 
 const NavItems: (() => JSX.Element)[] = [
     createReactNavLink(NavLink, "Home", URL.HOME, <BsGrid />),
+    createReactNavLink(NavLink, "Add User", URL.ADD_USER, <BsPeople />),
 ]
 
 export default NavItems

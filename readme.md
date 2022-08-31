@@ -1,6 +1,7 @@
 # How To Run
 
-### First clone this repo.
+- #### First clone this repo. 
+- #### you must need to have docker on your system.
 
 ## Process 1 (using bash)
 
@@ -49,7 +50,8 @@ npm run dev
 cd client && pnpm install
 
 # (run on client directory)
-npm run dev
+npm run build
+npm run preview
 ```
 
 
@@ -58,4 +60,4 @@ npm run dev
 ![screenshot](screenshot.png)
 
 
-by [milon27](https://milon27.com/)
+by [milon27.com](https://milon27.com/)

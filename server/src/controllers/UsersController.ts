@@ -1,6 +1,7 @@
 import { Gender } from "@prisma/client"
 import { startOfToday, endOfDay, startOfWeek, endOfWeek, startOfMonth, endOfMonth } from "date-fns"
 import { Request, Response } from "express"
+import { IAddUserDto } from "../models/AddUserDto"
 import MyResponse from "../models/MyResponse"
 import Helper from "../utils/Helper"
 
@@ -90,6 +91,25 @@ const UsersController = {
             res.status(500).json(MyResponse((e as Error).message))
         }
     },
+    addUser: async (req: Request, res: Response) => {
+        try {
+            const _user: IAddUserDto = req.body
+
+            const user = await req.prisma.users.create({
+                data: {
+                    name: _user.name,
+                    email: _user.email,
+                    device: _user.device,
+                    countryCode: _user.countryCode,
+                    gender: _user.gender as any
+                }
+            })
+            res.status(200).json(MyResponse("deleteUser done", user))
+        } catch (e) {
+            console.log("addUser: ", e);
+            res.status(500).json(MyResponse((e as Error).message))
+        }
+    }
 }
 
 interface UserFilterQuery { country: string, device: string, gender: Gender }

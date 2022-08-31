@@ -21,4 +21,10 @@ UsersRouter.get('/filter', UsersController.getUsersWithFilter)
  */
 UsersRouter.delete('/delete/:id', UsersController.deleteUser)
 
+/**
+ * @description add user
+ * @post http://localhost:2727/users/add
+ */
+UsersRouter.post('/add', UsersController.addUser)
+
 export default UsersRouter
