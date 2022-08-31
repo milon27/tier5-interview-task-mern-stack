@@ -5,9 +5,9 @@ const UsersRouter = Router()
 
 /**
  * @description add track to fav list of current user
- * @post http://localhost:2727/track/add-fav/:id
+ * @get http://localhost:2727/users/get-info
  */
-UsersRouter.post('/add-fav/:id', UsersController.addToFav)
+UsersRouter.get('/get-info', UsersController.getDashboardUsers)
 
 
 export default UsersRouter

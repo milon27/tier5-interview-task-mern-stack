@@ -1,7 +1,11 @@
+import { format } from 'date-fns'
 import { CookieOptions } from 'express'
 import jwt from 'jsonwebtoken'
 
 const Helper = {
+    getDateInMySqlString: (date = new Date()) => {
+        return format(date, 'yyyy-MM-dd HH:mm:ss') //2021-11-03 09:24:47 (mysql format-24h)
+    },
     getJWTtoken: (uid: string) => {
         return jwt.sign({
             userId: uid

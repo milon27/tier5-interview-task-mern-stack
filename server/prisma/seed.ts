@@ -273,7 +273,6 @@ const getUtime = () => {
 
 const getRandomDate = () => {
     const date = new Date(new Date().getTime() - Math.random() * (1e+12))
-    // return format(date, 'yyyy-MM-dd 09:24:47') //2021-11-03 09:24:47 (mysql format)
     return date
 }
 
