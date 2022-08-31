@@ -21,6 +21,6 @@ const useMyQuery = <T>(url: string, init: T) => {
         load();
     }, []);
 
-    return { data, error, loading };
+    return { data, error, loading, setData };
 };
 export default useMyQuery;

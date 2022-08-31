@@ -1,12 +1,37 @@
 import { IUser } from '../../../utils/models/User'
+import { BsTrash } from 'react-icons/bs'
+import AxiosHelper from '../../../utils/AxiosHelper'
+import IResponse from '../../../utils/models/Response'
+import { IHomeData } from './Home'
+import { toast } from 'react-toastify'
 
 interface UserListProps {
     userList: IUser[]
+    setData: React.Dispatch<React.SetStateAction<IResponse<IHomeData>>>
 }
 
-export default function UserList({ userList = [] }: UserListProps) {
+export default function UserList({ setData, userList = [] }: UserListProps) {
+
+    const deleteUser = async (id: string) => {
+        const isDel = confirm("Are you sure?")
+        if (isDel)
+            await AxiosHelper.deleteData(`users/delete/${id}`, () => {
+                // update ui
+                setData(old => {
+                    return {
+                        ...old,
+                        response: {
+                            ...old.response!!,
+                            top15Users: userList.filter(item => item.id !== id)
+                        }
+                    }
+                })
+                toast("deleted user")
+            })
+    }
+
     if (userList.length == 0) {
-        return <p>loading....</p>
+        return <p className='text-center'> No User Found!</p>
     }
     return (
         <div>
@@ -22,6 +47,7 @@ export default function UserList({ userList = [] }: UserListProps) {
                                 else
                                     return null;
                             })}
+                            <th>Option</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,6 +67,9 @@ export default function UserList({ userList = [] }: UserListProps) {
                                         return null;
                                     }
                                 })}
+                                <td><BsTrash className='cursor-pointer text-primary' onClick={() => {
+                                    deleteUser(_item.id)
+                                }} /></td>
                             </tr>
                         })}
                     </tbody>

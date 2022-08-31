@@ -1,3 +1,4 @@
+import { Gender } from "@prisma/client"
 import { startOfToday, endOfDay, startOfWeek, endOfWeek, startOfMonth, endOfMonth } from "date-fns"
 import { Request, Response } from "express"
 import MyResponse from "../models/MyResponse"
@@ -46,10 +47,51 @@ const UsersController = {
             }))
         } catch (e) {
             console.log("getDashboardUsers: ", e);
-            res.status(500).json(MyResponse("already added!"))
+            res.status(500).json(MyResponse((e as Error).message))
         }
     },
+    getUsersWithFilter: async (req: Request, res: Response) => {
+        try {
+            const filter: UserFilterQuery = req.query as any
 
+            const queryCountry = filter.country || undefined
+            const queryGender = filter.gender || undefined
+            const queryDevice = filter.device || undefined
+
+            const Users = await req.prisma.users.findMany({
+                where: {
+                    countryCode: queryCountry,
+                    gender: queryGender,
+                    device: queryDevice
+                },
+                orderBy: {
+                    usageTimeInMin: "desc"
+                },
+                take: 15
+            })
+
+            res.status(200).json(MyResponse("get users", Users))
+        } catch (e) {
+            console.log("getUsersWithFilter: ", e);
+            res.status(500).json(MyResponse((e as Error).message))
+        }
+    },
+    deleteUser: async (req: Request, res: Response) => {
+        try {
+            const id = req.params.id
+            await req.prisma.users.delete({
+                where: {
+                    id: id
+                }
+            })
+            res.status(200).json(MyResponse("deleteUser done", true))
+        } catch (e) {
+            console.log("deleteUser: ", e);
+            res.status(500).json(MyResponse((e as Error).message))
+        }
+    },
 }
+
+interface UserFilterQuery { country: string, device: string, gender: Gender }
 
 export default UsersController
