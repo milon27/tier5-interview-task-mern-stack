@@ -15,19 +15,22 @@ const UsersController = {
             const monthlyStart = Helper.getDateInMySqlString(startOfMonth(new Date()))
             const monthlyEnd = Helper.getDateInMySqlString(endOfMonth(new Date()))
 
-            let countInfo: any[] = await req.prisma.$queryRaw`
+            let _countInfo: any[] = await req.prisma.$queryRaw`
                 select 'dau' as type , (select COUNT(id) from Users where lastActive BETWEEN  ${dailyStart}  AND  ${dailyEnd} )  as value 
                 union all
                 select 'wau' as type ,  (select COUNT(id) from Users  where lastActive BETWEEN  ${weeklyStart}  AND  ${weeklyEnd} ) as value 
                 union all
                 select 'mau' as type ,  (select COUNT(id) from Users  where lastActive BETWEEN  ${monthlyStart}  AND  ${monthlyEnd} ) as value;
             `;
+            let countInfo = {
+                dau: 0,
+                wau: 0,
+                mau: 0
+            }
 
-            countInfo = countInfo.map(item => {
-                return {
-                    ...item,
-                    "value": Number(item.value)
-                }
+            _countInfo.forEach(item => {
+                const key = item.type as "dau" | "wau" | "mau"
+                countInfo[key] = Number(item.value)
             })
 
             const top15Users = await req.prisma.users.findMany({

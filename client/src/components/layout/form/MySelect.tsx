@@ -7,7 +7,7 @@ interface iMySelectItem {
 interface iMySelect {
     label: string,
     hideLabel?: boolean,
-    value: string,//default id
+    value?: string,//default id
     labelAsFirst?: boolean,
     full_width?: boolean,
     options: iMySelectItem[],
