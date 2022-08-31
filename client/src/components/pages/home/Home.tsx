@@ -127,7 +127,7 @@ export default function Home() {
                 <Spacer px={20} />
                 <UserList userList={data?.response?.top15Users || []} setData={setData} />
 
-                <p className='text-center text-sm py-2 text-gray-400'>Note: I am always showing 15 result</p>
+                <p className='text-center text-sm py-2 text-gray-400'>Note: showing top 15 result</p>
             </LineCard>
         </MyPageWrapper>
     )
