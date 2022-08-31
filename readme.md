@@ -49,6 +49,7 @@ npm run seed
 
 # run the server (run on server directory)
 npm run dev
+# API running on http://localhost:2727/
 ```
 
 - **Run Client**
@@ -59,6 +60,7 @@ cd client && pnpm install
 # (run on client directory)
 npm run build
 npm run preview
+# application running on http://localhost:3000/
 ```
 
 
