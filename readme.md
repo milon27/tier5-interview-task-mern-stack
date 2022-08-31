@@ -1,9 +1,16 @@
+# Features
+- Admin login, register and logout.
+- Show daily,weekly,monthly active user number.
+- Show top 15 users by usage time in table.
+- Filter users by gender,country,device and show top 15 result.
+- Create new user.
+
 # How To Run
 
-- #### First clone this repo. 
-- #### you must need to have docker on your system.
+- **First clone this repo.** 
+- **you must need to have docker on your system.** 
 
-## Process 1 (using bash)
+### Process 1 (using bash)
 
 ```bash
 # run server first
@@ -15,7 +22,7 @@ bash client.sh
 # all done. if you want you can also run without bash script by following below's instruction.
 ```
 
-## Process 2 (manully)
+### Process 2 (manully)
 
 - **Run postgresql container**
 ```bash
