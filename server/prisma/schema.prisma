@@ -1,0 +1,42 @@
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+// define model
+model Admins {
+    id       String @id @default(uuid())
+    name     String @db.VarChar(100)
+    email    String @unique @db.VarChar(155)
+    password String
+}
+
+model Users {
+    id             String   @id @default(uuid())
+    name           String   @db.VarChar(100)
+    email          String   @unique @db.VarChar(155)
+    country        Country  @relation(fields: [countryCode], references: [code])
+    countryCode    String
+    gender         Gender   @default(MALE) //MALE,FEMALE,OTHER
+    device         String   @db.VarChar(50)
+    usageTimeInMin Float    @default(0) // 0 Minutes Usage Time
+    lastActive     DateTime @default(now())
+    createdAt      DateTime @default(now())
+}
+
+model Country {
+    code  String  @id
+    name  String
+    Users Users[]
+}
+
+// extras
+enum Gender {
+    MALE
+    FEMALE
+    OTHER
+}
