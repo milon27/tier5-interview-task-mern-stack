@@ -1,5 +1,5 @@
 # Run db container
-docker compose up -d
+docker compose up -d # comment if no docker
 
 # Make sure you have pnpm
 npm i -g pnpm

@@ -256,7 +256,7 @@ const _countryList = [
 export const CountryList = _countryList.map((item) => {
     return {
         id: item.code,
-        title: item.name,
+        title: `${item.name}-${item.code}`,
         value: item.code
     }
 })
